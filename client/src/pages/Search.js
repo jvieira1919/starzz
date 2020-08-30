@@ -11,33 +11,35 @@ class Books extends Component {
     search: "",
     title: "",
     author: "",
-    description: "",
+    description: ""
   };
 
-  componentDidMount() {}
+  componentDidMount() {
 
-  handleInputChange = (event) => {
+  }
+
+  handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
-      [name]: value,
+      [name]: value
     });
   };
 
-  handleFormSubmit = (event) => {
+  handleFormSubmit = event => {
     event.preventDefault();
-    API.searchBook(this.state.search)
-      .then((res) => this.setState({ books: res.data.items }))
-      .catch((err) => console.log(err));
+      API.searchBook(this.state.search)
+        .then(res => this.setState({ books: res.data.items }))
+        .catch(err => console.log(err));
   };
 
-  handleSavedBook = (data) => {
-    console.log("This is the book data from handleSavedBook:");
+  handleSavedBook = data => {
+    console.log("This is the book data from handleSavedBook:")
     console.log(data);
     API.saveBook(data)
-      .then((res) => alert("Your book was saved!") && this.loadBooks())
-
-      .catch((err) => console.log(err));
-  };
+    .then(res => alert("Your book was saved!") && this.loadBooks())
+   
+    .catch(err => console.log(err));
+  }
 
   render() {
     return (
@@ -46,39 +48,37 @@ class Books extends Component {
           <h1>Google Books App</h1>
           <h5>Search & Save a Book of Choice</h5>
         </Jumbotron>
-        <Container fluid>
-          <Row>
-            <Col size="md-6">
-              <div>
-                <form>
-                  Search for a Book:
-                  <Input
-                    value={this.state.search}
-                    onChange={this.handleInputChange}
-                    name="search"
-                    placeholder="Enter a Book"
-                  />
-                  <FormBtn
-                    disabled={!this.state.search}
-                    onClick={this.handleFormSubmit}
-                  >
-                    Search
-                  </FormBtn>
-                </form>
-              </div>
+      <Container fluid>
+      <Row>
+      <Col size="md-6">
+            <div>
+            <form>
+                Search for a Book:
+              <Input
+                value={this.state.search}
+                onChange={this.handleInputChange}
+                name="search"
+                placeholder="Enter a Book"
+              />
+              <FormBtn
+                disabled={!(this.state.search)}
+                onClick={this.handleFormSubmit}
+              >
+                Search 
+              </FormBtn>
+            </form>
+            </div>
             </Col>
-          </Row>
-          <Row>
+            </Row>
+            <Row>
             <Col size="md-12">
               {!this.state.books.length ? (
-                <h1 id="message" className="text-center">
-                  {" "}
-                </h1>
+                <h1 id="message" className="text-center"> </h1> 
               ) : (
                 <div>
-                  {this.state.books.map((books) => {
-                    return (
-                      <BookListItem
+                  {this.state.books.map(books => {
+                    return(
+                      <BookListItem 
                         key={books.id}
                         title={books.volumeInfo.title}
                         author={books.volumeInfo.authors}
@@ -86,24 +86,23 @@ class Books extends Component {
                         href={books.volumeInfo.previewLink}
                         thumbnail={books.volumeInfo.imageLinks.thumbnail}
                         description={books.volumeInfo.description}
-                        handleSavedBook={() =>
-                          this.handleSavedBook({
-                            title: books.volumeInfo.title,
-                            author: books.volumeInfo.authors,
-                            id: books.id,
-                            href: books.volumeInfo.previewLink,
-                            thumbnail: books.volumeInfo.imageLinks.thumbnail,
-                            description: books.volumeInfo.description,
-                          })
-                        }
-                      />
-                    );
-                  })}
-                </div>
+                        handleSavedBook={() => this.handleSavedBook({
+                          title: books.volumeInfo.title,
+                          author: books.volumeInfo.authors,
+                          id: books.id,
+                          href: books.volumeInfo.previewLink,
+                          thumbnail: books.volumeInfo.imageLinks.thumbnail,
+                          description: books.volumeInfo.description
+                        })}
+                      />    
+                  );              
+                  })}                              
+               </div>
+
               )}
             </Col>
           </Row>
-        </Container>
+      </Container>
       </div>
     );
   }

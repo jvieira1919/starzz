@@ -1,10 +1,10 @@
 .btn {
-  cursor: pointer;
-  color: rgb(255, 255, 255);
-  background-color: #960505;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    background-color: #960505;
 }
 
 .btn:hover {
-  color: #83e603;
-  background-color: #000000;
+    color: #83e603;
+    background-color: #000000;
 }

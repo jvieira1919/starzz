@@ -8,7 +8,7 @@ function Thumbnail({ src }) {
       role="img"
       aria-label="Book Image"
       style={{
-        backgroundImage: `url(${src})`,
+        backgroundImage: `url(${src})`
       }}
     />
   );

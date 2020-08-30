@@ -6,12 +6,12 @@ import API from "../utils/API";
 
 class Detail extends Component {
   state = {
-    book: {},
+    book: {}
   };
   componentDidMount() {
     API.getBook(this.props.match.params.id)
-      .then((res) => this.setState({ book: res.data }))
-      .catch((err) => console.log(err));
+      .then(res => this.setState({ book: res.data }))
+      .catch(err => console.log(err));
   }
 
   render() {
@@ -30,7 +30,9 @@ class Detail extends Component {
           <Col size="md-10 md-offset-1">
             <article>
               <h1>Synopsis</h1>
-              <p>{this.state.book.synopsis}</p>
+              <p>
+                {this.state.book.synopsis}
+              </p>
             </article>
           </Col>
         </Row>

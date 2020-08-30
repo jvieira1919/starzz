@@ -3,6 +3,7 @@ import Thumbnail from "../Thumbnail";
 import { Container, Row, Col } from "../Grid";
 import "./style.css";
 
+
 export function List({ children }) {
   return <ul className="list-group">{children}</ul>;
 }
@@ -13,7 +14,7 @@ export function ListItem({
   author,
   description,
   href,
-  deleteBook,
+  deleteBook
 }) {
   return (
     <li className="list-group-item">
@@ -26,14 +27,10 @@ export function ListItem({
             <h3>{title}</h3>
             <h5>{author}</h5>
             <p>{description}</p>
-            <button className="btn">
-              <a id="btn" rel="noreferrer noopener" target="_blank" href={href}>
-                View Books
-              </a>
-            </button>
-            <button className="btn" id="btn" onClick={() => deleteBook()}>
-              Delete Books
-            </button>
+            <button className="btn"><a id="btn" rel="noreferrer noopener" target="_blank" href={href}>
+              View Books
+            </a></button>
+            <button className="btn" id="btn" onClick={() => deleteBook()}>Delete Books</button>
           </Col>
         </Row>
       </Container>

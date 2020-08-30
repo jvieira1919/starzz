@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-import { Container } from "../components/Grid";
+import {  Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 
 class Saved extends Component {
@@ -15,43 +15,44 @@ class Saved extends Component {
 
   loadBooks = () => {
     API.getBooks()
-      .then((res) => this.setState({ books: res.data }))
-      .catch((err) => console.log(err));
+      .then(res =>
+        this.setState({ books: res.data })
+      )
+      .catch(err => console.log(err));
   };
 
-  deleteBook = (id) => {
+  deleteBook = id => {
     API.deleteBook(id)
-      .then((res) => this.loadBooks())
-      .catch((err) => console.log(err));
+      .then(res => this.loadBooks())
+      .catch(err => console.log(err));
   };
 
   render() {
     return (
       <div>
-        <Jumbotron>
-          <h1>Books Saved</h1>
-        </Jumbotron>
-        <Container fluid>
-          {this.state.books.length ? (
-            <List>
-              {this.state.books.map((book) => (
-                <ListItem
-                  key={book._id}
-                  title={book.title}
-                  author={book.author}
-                  href={book.href}
-                  thumbnail={book.thumbnail}
-                  description={book.description}
-                  deleteBook={() => this.deleteBook(book._id)}
-                />
-              ))}
-            </List>
-          ) : (
-            <h1 id="message" className="text-center">
-              No Results{" "}
-            </h1>
-          )}
-        </Container>
+      <Jumbotron>
+      <h1>Books Saved</h1>
+    </Jumbotron>
+      <Container fluid>
+            {this.state.books.length ? (
+              <List>
+                {this.state.books.map(book => (
+                  <ListItem
+                    key={book._id}
+                    title={book.title}
+                    author={book.author}
+                    href={book.href}
+                    thumbnail={book.thumbnail}
+                    description={book.description}
+                    deleteBook={() => this.deleteBook(book._id)}
+                  />
+
+                ))}
+              </List>
+            ) : (
+              <h1 id="message" className="text-center">No Results </h1>
+            )}
+      </Container>
       </div>
     );
   }
